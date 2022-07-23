@@ -351,6 +351,36 @@ data.forEach(version => {
       await page.locator('#calculateButton').click();     
       await expect(page.locator('#numberAnswerField')).toHaveValue('-6-3');
     });
+
+    test('Concatenating blank space and blank space results in blank space', async ({ page }) => {
+      await page.goto('https://testsheepnz.github.io/BasicCalculator');
+      await page.selectOption('#selectBuild', { label: version});
+      await page.locator('#number1Field').type('');
+      await page.locator('#number2Field').type('');
+      await page.selectOption('#selectOperationDropdown', {label: 'Concatenate'});
+      await page.locator('#calculateButton').click();     
+      await expect(page.locator('#numberAnswerField')).toHaveValue('');
+    });
+
+    test('Concatenating a and b results in ab', async ({ page }) => {
+      await page.goto('https://testsheepnz.github.io/BasicCalculator');
+      await page.selectOption('#selectBuild', { label: version});
+      await page.locator('#number1Field').type('a');
+      await page.locator('#number2Field').type('b');
+      await page.selectOption('#selectOperationDropdown', {label: 'Concatenate'});
+      await page.locator('#calculateButton').click();     
+      await expect(page.locator('#numberAnswerField')).toHaveValue('ab');
+    });
+
+    test('Concatenating 1.5 and 1.5 results in 1.51.5', async ({ page }) => {
+      await page.goto('https://testsheepnz.github.io/BasicCalculator');
+      await page.selectOption('#selectBuild', { label: version});
+      await page.locator('#number1Field').type('1.5');
+      await page.locator('#number2Field').type('1.5');
+      await page.selectOption('#selectOperationDropdown', {label: 'Concatenate'});
+      await page.locator('#calculateButton').click();     
+      await expect(page.locator('#numberAnswerField')).toHaveValue('1.51.5');
+    });
     
     
   });
