@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.21.1"
+  },
+  "dependencies": {
+    "expect.js": "^0.3.1"
   }
 }
